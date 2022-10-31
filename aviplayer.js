@@ -12,42 +12,63 @@ Webflow.push(function() {
 	    window.Webflow.require("lottie").lottie.resize();
 	});
 
+	var urlParam = window.location.hash.substr(1);
+	if (urlParam) {
+		if ($("#" + urlParam).length) {
+			$([document.documentElement, document.body]).animate({
+		        scrollTop: $("#" + urlParam).offset().top
+		    }, 1200);
+			$("#" + urlParam).click();
+		}
+	}
+
+	$("a").click((e) => {
+		if ($(e.currentTarget).attr("destelm").length) {
+			e.preventDefault();
+			if ($(e.currentTarget).attr("target") == "_blank") {
+				window.open($(e.currentTarget).attr("href") + "#" + $(e.currentTarget).attr("destelm"), "_blank");
+			} else {
+				window.location.href = $(e.currentTarget).attr("href") + "#" + $(e.currentTarget).attr("destelm");
+			}
+		}
+	});
+
 	if ($("#aviglobalcontrols").length) {
 		var gControls = $("#aviglobalcontrols");
 
-		$(window).on('scroll', function() {
-			if (activePlayer && !hasClosed) {
-				var mainaudio = $(".aviaudio[anim='" + activePlayer + "']");
-				var controls = mainaudio.parent().parent();
-				if (!isInViewport($(controls))) { //controls not in view
-					if (gControls.hasClass("hidden-default")) {
-						gControls.removeClass("hidden-default");
-					}
-				} else {
-					if (!gControls.hasClass("hidden-default")) {
-						gControls.addClass("hidden-default");
-					}
-				}
-			}
-		});
+		// $(window).on('scroll', function() {
+		// 	if (activePlayer && !hasClosed) {
+		// 		var mainaudio = $(".aviaudio[anim='" + activePlayer + "']");
+		// 		var controls = mainaudio.parent().parent();
+		// 		if (!isInViewport($(controls))) { //controls not in view
+		// 			if (gControls.hasClass("hidden-default")) {
+		// 				gControls.removeClass("hidden-default");
+		// 			}
+		// 		} else {
+		// 			if (!gControls.hasClass("hidden-default")) {
+		// 				gControls.addClass("hidden-default");
+		// 			}
+		// 		}
+		// 	}
+		// });
 
-		$(document).click(() => {
-			setTimeout(() => {
-				if (activePlayer && !hasClosed) {
-					var mainaudio = $(".aviaudio[anim='" + activePlayer + "']");
-					var controls = mainaudio.parent().parent();
-					if (!isInViewport($(controls))) { //controls not in view
-						if (gControls.hasClass("hidden-default")) {
-							gControls.removeClass("hidden-default");
-						}
-					} else {
-						if (!gControls.hasClass("hidden-default")) {
-							gControls.addClass("hidden-default");
-						}
-					}
-				}
-			}, 100);
-		});
+		// $(document).click(() => {
+		// 	setTimeout(() => {
+		// 		if (activePlayer && !hasClosed) {
+		// 			var mainaudio = $(".aviaudio[anim='" + activePlayer + "']");
+		// 			var controls = mainaudio.parent().parent();
+		// 			if (!isInViewport($(controls))) { //controls not in view
+		// 				if (gControls.hasClass("hidden-default")) {
+		// 					gControls.removeClass("hidden-default");
+		// 				}
+		// 			} else {
+		// 				if (!gControls.hasClass("hidden-default")) {
+		// 					gControls.addClass("hidden-default");
+		// 				}
+		// 			}
+		// 		}
+		// 	}, 100);
+		// });
 	}
 });
 
@@ -118,10 +139,10 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 							clearInterval(playInt);
 							thisMainBtn.removeClass("loading");
 							thisMainBtn.addClass("playing");
-							if (fixed) {
-								gMainBtn.removeClass("loading");
-								gMainBtn.addClass("playing");
-							}
+							// if (fixed) {
+							// 	gMainBtn.removeClass("loading");
+							// 	gMainBtn.addClass("playing");
+							// }
 						} else {
 						}
 						playMax++;
@@ -134,51 +155,51 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 					});
 				}
 
-				var gControls;
+				// var gControls;
 
-				if (fixed) {
-					gControls = $("#aviglobalcontrols");
+				// if (fixed) {
+				// 	gControls = $("#aviglobalcontrols");
 
-					gMainBtn = gControls.find(".main");
-					var gBackBtn = gControls.find("._15back");
-					var gForthBtn = gControls.find("._30forth");
-					var gReBtn = gControls.parent().find(".restart");
-					var gCloseBtn = gControls.parent().find(".avifloaterclose");
+				// 	gMainBtn = gControls.find(".main");
+				// 	var gBackBtn = gControls.find("._15back");
+				// 	var gForthBtn = gControls.find("._30forth");
+				// 	var gReBtn = gControls.parent().find(".restart");
+				// 	var gCloseBtn = gControls.parent().find(".avifloaterclose");
 				
-					gMainBtn.click(() => {
-						if (activePlayer == id) {
-							thisMainBtn.click();
-						}
-					});
-					gBackBtn.click(() => {
-						if (activePlayer == id) {
-							thisBackBtn.click();
-						}
-					});
-					gForthBtn.click(() => {
-						if (activePlayer == id) {
-							thisForthBtn.click();
-						}
-					});
-					gReBtn.click(() => {
-						if (activePlayer == id) {
-							thisReBtn.click();
-						}
-					});
-					gCloseBtn.click(() => {
-						if (activePlayer == id) {
-							thisCloseBtn.click();
-						}
-					});
-				}
+				// 	gMainBtn.click(() => {
+				// 		if (activePlayer == id) {
+				// 			thisMainBtn.click();
+				// 		}
+				// 	});
+				// 	gBackBtn.click(() => {
+				// 		if (activePlayer == id) {
+				// 			thisBackBtn.click();
+				// 		}
+				// 	});
+				// 	gForthBtn.click(() => {
+				// 		if (activePlayer == id) {
+				// 			thisForthBtn.click();
+				// 		}
+				// 	});
+				// 	gReBtn.click(() => {
+				// 		if (activePlayer == id) {
+				// 			thisReBtn.click();
+				// 		}
+				// 	});
+				// 	gCloseBtn.click(() => {
+				// 		if (activePlayer == id) {
+				// 			thisCloseBtn.click();
+				// 		}
+				// 	});
+				// }
 
 				audioSel.onended = () => {
 					if (thisMainBtn.hasClass("playing")) {
-						if (fixed) {
-							if (gMainBtn.hasClass("playing")) {
-								gMainBtn.removeClass("playing");
-							}
-						}
+						// if (fixed) {
+						// 	if (gMainBtn.hasClass("playing")) {
+						// 		gMainBtn.removeClass("playing");
+						// 	}
+						// }
 						thisMainBtn.removeClass("playing");
 						thisMainBtn.addClass("ended");
 						isPlaying = 0;
@@ -200,10 +221,10 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 							if ($(v)[0].wrapper.id == id) {
 								thisMainBtn.removeClass("playing");
 								thisMainBtn.addClass("loading");
-								if (fixed) {
-									gMainBtn.removeClass("playing");
-									gMainBtn.addClass("loading");
-								}
+								// if (fixed) {
+								// 	gMainBtn.removeClass("playing");
+								// 	gMainBtn.addClass("loading");
+								// }
 								$(v)[0].pause();
 								awaitPlay(audioSel, $(v)[0]);
 							}
@@ -297,11 +318,11 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 									if (thisMainBtn.hasClass("playing")) {
 										isPlaying = 0;
 										thisMainBtn.removeClass("playing");
-										if (fixed) {
-											if (gMainBtn.hasClass("playing")) {
-												gMainBtn.removeClass("playing");
-											}
-										}
+										// if (fixed) {
+										// 	if (gMainBtn.hasClass("playing")) {
+										// 		gMainBtn.removeClass("playing");
+										// 	}
+										// }
 										thisMainBtn.addClass("ended")
 										$(v)[0].goToAndStop(audioSel.duration * 1000, false);
 									} else {
@@ -326,11 +347,11 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 								$(v)[0].pause();
 								isPlaying = 0;
 								thisMainBtn.removeClass("playing");
-								if (fixed) {
-									if (gMainBtn.hasClass("playing")) {
-										gMainBtn.removeClass("playing");
-									}
-								}
+								// if (fixed) {
+								// 	if (gMainBtn.hasClass("playing")) {
+								// 		gMainBtn.removeClass("playing");
+								// 	}
+								// }
 							} else {
 								if (thisMainBtn.hasClass("ended")) {
 									$(v)[0].goToAndStop(0, 1);
@@ -340,7 +361,7 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 									hasClosed = 0;
 								}
 								if (fixed) {
-									activePlayer = id;
+									//activePlayer = id;
 								} else {
 									hasClosed = 1;
 									if ($("#aviglobalcontrols").length) {
@@ -354,11 +375,11 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 									aviLinkPromise = 0;
 								}
 								awaitPlay(audioSel, $(v)[0], true);
-								if (fixed) {
-									if (!gMainBtn.hasClass("loading")) {
-										gMainBtn.addClass("loading");
-									}
-								}
+								// if (fixed) {
+								// 	if (!gMainBtn.hasClass("loading")) {
+								// 		gMainBtn.addClass("loading");
+								// 	}
+								// }
 								thisMainBtn.addClass("loading");
 
 								if (metadata) {
@@ -415,11 +436,11 @@ function initAviPlayer(id, autoplay, fixed, metadata) {
 								audioSel.pause();
 								isPlaying = 0;
 								thisMainBtn.removeClass("playing");
-								if (fixed) {
-									if (gMainBtn.hasClass("playing")) {
-										gMainBtn.removeClass("playing");
-									}
-								}
+								// if (fixed) {
+								// 	if (gMainBtn.hasClass("playing")) {
+								// 		gMainBtn.removeClass("playing");
+								// 	}
+								// }
 							}
 							$(v)[0].goToAndStop(0, 1);
 							audioSel.currentTime = 0;
