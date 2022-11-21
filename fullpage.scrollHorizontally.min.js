@@ -1,0 +1,10 @@
+"use strict";
+/*!
+ * fullpage.js Scroll Horizontally Extension 0.1.0
+ * for fullpage.js v4
+ * https://github.com/alvarotrigo/fullPage.js
+ *
+ * @license This code has been bought from www.alvarotrigo.com/fullPage/extensions/ and it is not free to use or distribute.
+ * Copyright (C) 2016 alvarotrigo.com - A project by Alvaro Trigo
+ */
+/* eslint-disable */window.fp_scrollHorizontallyExtension=function(){var e=this,t=window.fp_utils,a=window.fullpage_api,s=t,d=t.$,i=a.getFullpageData(),f=i.options,n=i.internals,p=".fp-section",u=".fp-slide";e.getScrollSection=function(e){var t,i=e.type,n=e.scrollSection,o=d(".fp-section.active")[0],l=d(u,o).length,r=f.scrollHorizontally&&1<l,c=1===d(p).length;if(r)if(t=d(".fp-slide.active",o)[0],"down"===i){if(s.index(t)+1!==l||c)return a.moveSlideRight}else if(s.index(t)||c)return a.moveSlideLeft;return n},e.c=n.c;var o=e["common".charAt(0)];return"complete"===document.readyState&&o("scrollHorizontally"),window.addEventListener("load",function(){o("scrollHorizontally")}),e};
