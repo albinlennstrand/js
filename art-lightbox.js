@@ -274,6 +274,9 @@
     }
     
     function openImage(slug, detail, retDet) {
+      if ($('.embedly-embed').length) {
+        $('.embedly-embed').attr('src', function ( i, val ) { return val; });
+      }
       if (!isTran) {
         isTran = true;
         var imgData;
